@@ -16,5 +16,11 @@ def part(s: str) -> int:
 
 
 parser = ArgumentParser(prog="AoC", description="Advent of Code 2025 solutions")
-parser.add_argument("day", type=day)
-parser.add_argument("part", type=part)
+subparsers = parser.add_subparsers(dest="command")
+
+run_parser = subparsers.add_parser("run", help="run a solution")
+run_parser.add_argument("day", type=day)
+run_parser.add_argument("part", type=part)
+
+gen_parser = subparsers.add_parser("gen", help="create a solution file")
+gen_parser.add_argument("day", type=day)
