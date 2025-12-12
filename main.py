@@ -1,11 +1,12 @@
 import sys
 from aoc.cli import parser
+from aoc.runner import run
 
 
 def main():
-    parsed = parser.parse_args(sys.argv[1:])
-    print(f"day: {parsed.day}")
-    print(f"part: {parsed.part}")
+    args = parser.parse_args(sys.argv[1:])
+    result = run(args.day, args.part)
+    print(f"Day {args.day} part {args.part} result: {result}")
 
 
 if __name__ == "__main__":
