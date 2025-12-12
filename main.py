@@ -1,4 +1,5 @@
 import sys
+
 from aoc.cli import parser
 from aoc.runner import run
 

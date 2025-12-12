@@ -1,7 +1,6 @@
-from typing import Any
-
 import importlib
 from os import path
+from typing import Any
 
 
 def run(day: int, part: int) -> Any:
