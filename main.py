@@ -1,5 +1,11 @@
+import sys
+from aoc.cli import parser
+
+
 def main():
-    print("Hello from aoc25!")
+    parsed = parser.parse_args(sys.argv[1:])
+    print(f"day: {parsed.day}")
+    print(f"part: {parsed.part}")
 
 
 if __name__ == "__main__":

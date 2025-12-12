@@ -2,6 +2,7 @@
 
 pkgs.mkShell {
   packages = [
+    pkgs.just
     pkgs.uv
   ];
 }
