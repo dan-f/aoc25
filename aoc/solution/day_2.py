@@ -4,10 +4,10 @@ from io import TextIOWrapper
 from typing import Generator
 
 
-def part_1(input: TextIOWrapper) -> int:
+def part_1(raw_input: TextIOWrapper) -> int:
     invalid_ids = 0
 
-    for start_str, end_str in parse_ranges(input):
+    for start_str, end_str in parse_ranges(raw_input):
         # ranges containing all odd-lengthed IDs need not be considered
         if len(start_str) == len(end_str) and len(start_str) % 2 == 1:
             continue
@@ -38,10 +38,10 @@ def part_1(input: TextIOWrapper) -> int:
     return invalid_ids
 
 
-def part_2(input: TextIOWrapper):
+def part_2(raw_input: TextIOWrapper):
     invalid_ids = 0
 
-    for start_str, end_str in parse_ranges(input):
+    for start_str, end_str in parse_ranges(raw_input):
         if len(start_str) == len(end_str) == 1:
             continue
 
@@ -86,7 +86,7 @@ def primes(limit: int) -> Generator[int]:
     yield from (i + 2 for i, is_prime in enumerate(PRIMES) if is_prime)
 
 
-def parse_ranges(input: TextIOWrapper) -> Generator[(str, str)]:
-    for range_str in input.read().strip().split(","):
+def parse_ranges(raw_input: TextIOWrapper) -> Generator[(str, str)]:
+    for range_str in raw_input.read().strip().split(","):
         [start_str, end_str] = range_str.split("-")
         yield start_str, end_str

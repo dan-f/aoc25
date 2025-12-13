@@ -1,9 +1,9 @@
 from io import TextIOWrapper
 
 
-def part_1(input: TextIOWrapper):
+def part_1(raw_input: TextIOWrapper):
     joltage = 0
-    for line in input:
+    for line in raw_input:
         line = line.strip()
         first_i, first_c = max(enumerate(line[:-1]), key=lambda x: int(x[1]))
         second_c = max(line[first_i + 1 :], key=int)
@@ -11,9 +11,9 @@ def part_1(input: TextIOWrapper):
     return joltage
 
 
-def part_2(input: TextIOWrapper):
+def part_2(raw_input: TextIOWrapper):
     joltage = 0
-    for line in input:
+    for line in raw_input:
         line = line.strip()
         digits = [0] * 12
         start = 0
