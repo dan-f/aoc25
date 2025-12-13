@@ -2,17 +2,16 @@ import shutil
 from pathlib import Path
 
 
-def write_template(day: int):
+def write_template(day: int, input_dir: Path):
     solns_dir = Path(__file__).parent
     soln_template_path = solns_dir.joinpath("_template.py")
     soln_path = solns_dir.joinpath(f"day_{day}.py")
     if soln_path.exists():
         raise FileExistsError(f"solution file for day {day} already exists")
 
-    inputs_dir = Path.cwd().joinpath("input")
-    if not inputs_dir.exists():
-        inputs_dir.mkdir()
-    input_path = inputs_dir.joinpath(f"{day}.txt")
+    if not input_dir.exists():
+        input_dir.mkdir()
+    input_path = input_dir.joinpath(f"{day}.txt")
     if not input_path.exists():
         input_path.touch()
 

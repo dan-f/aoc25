@@ -12,7 +12,7 @@ def main():
                 f"Day {args.day} part {args.part} result: {result} (elapsed: {elapsed_time:.3f}s)"
             )
         case "gen":
-            solution.write_template(args.day)
+            solution.write_template(args.day, args.input_dir)
         case _:
             cli.parser.print_help()
 

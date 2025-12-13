@@ -16,15 +16,22 @@ def part(s: str) -> int:
     return n
 
 
+def input_dir(s: str) -> Path:
+    p = Path(s)
+    if not p.exists():
+        raise FileNotFoundError(f"Input directory '{p}' does not exist")
+    return p
+
+
 parser = ArgumentParser(prog="AoC", description="Advent of Code 2025 solutions")
 subparsers = parser.add_subparsers(dest="command")
+parser.add_argument(
+    "-i", "--input-dir", type=input_dir, default=Path.cwd().joinpath("input")
+)
 
 run_parser = subparsers.add_parser("run", help="run a solution")
 run_parser.add_argument("day", type=day)
 run_parser.add_argument("part", type=part)
-run_parser.add_argument(
-    "-i", "--input-dir", type=Path, default=Path.cwd().joinpath("input")
-)
 
-gen_parser = subparsers.add_parser("gen", help="create a solution file")
+gen_parser = subparsers.add_parser("gen", help="create solution/input files for a day")
 gen_parser.add_argument("day", type=day)
