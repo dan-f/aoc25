@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from pathlib import Path
 
 
 def day(s: str) -> int:
@@ -21,6 +22,9 @@ subparsers = parser.add_subparsers(dest="command")
 run_parser = subparsers.add_parser("run", help="run a solution")
 run_parser.add_argument("day", type=day)
 run_parser.add_argument("part", type=part)
+run_parser.add_argument(
+    "-i", "--input-dir", type=Path, default=Path.cwd().joinpath("input")
+)
 
 gen_parser = subparsers.add_parser("gen", help="create a solution file")
 gen_parser.add_argument("day", type=day)
