@@ -1,12 +1,12 @@
 from io import TextIOWrapper
-from typing import Generator, Generic, Iterator, TypeVar
+from typing import Generic, Iterator, TypeVar
 
 T = TypeVar("T")
 
 
 class Grid(Generic[T]):
     @staticmethod
-    def from_raw(raw_input: TextIOWrapper) -> "Grid[T]":
+    def from_raw(raw_input: TextIOWrapper) -> "Grid[str]":
         return Grid([[c for c in line.strip()] for line in raw_input])
 
     def __init__(self, data: list[list[T]]):
@@ -18,12 +18,12 @@ class Grid(Generic[T]):
 
     @property
     def cols(self) -> int:
-        return len(self.data[0] if self.data else 0)
+        return len(self.data[0]) if self.data else 0
 
-    def __getitem__(self, coord: tuple[int, int]) -> list[T]:
+    def __getitem__(self, coord: tuple[int, int]) -> T:
         return self.data[coord[0]][coord[1]]
 
-    def __setitem__(self, coord: tuple[int, int], item: T):
+    def __setitem__(self, coord: tuple[int, int], item: T) -> None:
         self.data[coord[0]][coord[1]] = item
 
     def __iter__(self) -> Iterator[tuple[tuple[int, int], T]]:
@@ -31,7 +31,7 @@ class Grid(Generic[T]):
             for c in range(self.cols):
                 yield (r, c), self.data[r][c]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         items = []
         for (r, c), item in self:
             items.append(repr(item) if type(item) != str else item)
@@ -40,11 +40,11 @@ class Grid(Generic[T]):
         return "".join(items)
 
 
-def part_1(raw_input: TextIOWrapper):
+def part_1(raw_input: TextIOWrapper) -> int:
     return sum(1 for _ in accessible_rolls(Grid.from_raw(raw_input)))
 
 
-def part_2(raw_input: TextIOWrapper):
+def part_2(raw_input: TextIOWrapper) -> int:
     grid = Grid.from_raw(raw_input)
     removed = 0
     coords = [coord for coord in accessible_rolls(grid)]
@@ -56,7 +56,7 @@ def part_2(raw_input: TextIOWrapper):
     return removed
 
 
-def accessible_rolls(grid: Grid[str]) -> Generator[tuple[int, int]]:
+def accessible_rolls(grid: Grid[str]) -> Iterator[tuple[int, int]]:
     for (r, c), item in grid:
         if item != "@":
             continue

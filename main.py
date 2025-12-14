@@ -3,7 +3,7 @@ import sys
 from aoc import cli, runner, solution
 
 
-def main():
+def main() -> None:
     args = cli.parser.parse_args(sys.argv[1:])
     match args.command:
         case "run":

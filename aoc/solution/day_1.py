@@ -1,8 +1,8 @@
 from io import TextIOWrapper
-from typing import Generator
+from typing import Iterator
 
 
-def part_1(raw_input: TextIOWrapper):
+def part_1(raw_input: TextIOWrapper) -> int:
     result = 0
     dial = 50
     for turn in rotations(raw_input):
@@ -12,7 +12,7 @@ def part_1(raw_input: TextIOWrapper):
     return result
 
 
-def part_2(raw_input: TextIOWrapper):
+def part_2(raw_input: TextIOWrapper) -> int:
     result = 0
     dial = 50
     for turn in rotations(raw_input):
@@ -27,7 +27,7 @@ def part_2(raw_input: TextIOWrapper):
     return result
 
 
-def rotations(raw_input: TextIOWrapper) -> Generator[int]:
+def rotations(raw_input: TextIOWrapper) -> Iterator[int]:
     for line in raw_input:
         line = line.strip()
         num = int(line[1:])

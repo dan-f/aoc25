@@ -1,7 +1,7 @@
 from io import TextIOWrapper
 
 
-def part_1(raw_input: TextIOWrapper):
+def part_1(raw_input: TextIOWrapper) -> int:
     joltage = 0
     for line in raw_input:
         line = line.strip()
@@ -11,11 +11,11 @@ def part_1(raw_input: TextIOWrapper):
     return joltage
 
 
-def part_2(raw_input: TextIOWrapper):
+def part_2(raw_input: TextIOWrapper) -> int:
     joltage = 0
     for line in raw_input:
         line = line.strip()
-        digits = [0] * 12
+        digits = [""] * 12
         start = 0
         end = len(line) - 11
         for d in range(12):

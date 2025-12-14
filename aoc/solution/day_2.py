@@ -1,7 +1,7 @@
 import math
 from functools import cache
 from io import TextIOWrapper
-from typing import Generator
+from typing import Iterator
 
 
 def part_1(raw_input: TextIOWrapper) -> int:
@@ -38,7 +38,7 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return invalid_ids
 
 
-def part_2(raw_input: TextIOWrapper):
+def part_2(raw_input: TextIOWrapper) -> int:
     invalid_ids = 0
 
     for start_str, end_str in parse_ranges(raw_input):
@@ -68,7 +68,7 @@ def prime_factors(n: int) -> list[int]:
 PRIMES = [True, True]
 
 
-def primes(limit: int) -> Generator[int]:
+def primes(limit: int) -> Iterator[int]:
     if len(PRIMES) < limit - 1:
         PRIMES.extend(True for _ in range(limit - 1 - len(PRIMES)))
     p = 2
@@ -76,7 +76,6 @@ def primes(limit: int) -> Generator[int]:
         if not PRIMES[p - 2]:
             p += 1
             continue
-        # yield p
         i = 2
         while (p * i) <= limit:
             PRIMES[p * i - 2] = False
@@ -86,7 +85,7 @@ def primes(limit: int) -> Generator[int]:
     yield from (i + 2 for i, is_prime in enumerate(PRIMES) if is_prime)
 
 
-def parse_ranges(raw_input: TextIOWrapper) -> Generator[(str, str)]:
+def parse_ranges(raw_input: TextIOWrapper) -> Iterator[tuple[str, str]]:
     for range_str in raw_input.read().strip().split(","):
         [start_str, end_str] = range_str.split("-")
         yield start_str, end_str

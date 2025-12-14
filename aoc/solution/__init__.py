@@ -2,7 +2,7 @@ import shutil
 from pathlib import Path
 
 
-def write_template(day: int, input_dir: Path):
+def write_template(day: int, input_dir: Path) -> None:
     solns_dir = Path(__file__).parent
     soln_template_path = solns_dir.joinpath("_template.py")
     soln_path = solns_dir.joinpath(f"day_{day}.py")
