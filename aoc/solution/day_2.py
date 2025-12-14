@@ -14,12 +14,12 @@ def part_1(raw_input: TextIOWrapper) -> int:
 
         next_invalid = float("-inf")
 
-        for id in range(int(start_str), int(end_str) + 1):
-            if id < next_invalid:
+        for id_ in range(int(start_str), int(end_str) + 1):
+            if id_ < next_invalid:
                 continue
 
             # skip odd-length IDs
-            id_str = str(id)
+            id_str = str(id_)
             if len(id_str) % 2 == 1:
                 continue
 
@@ -30,7 +30,7 @@ def part_1(raw_input: TextIOWrapper) -> int:
             elif front_i < back_i:
                 next_invalid = int(f"{(front_i + 1)}{(front_i + 1)}")
             else:
-                invalid_ids += id
+                invalid_ids += id_
                 next_invalid = int(f"{(front_i + 1)}{(front_i + 1)}")
             if next_invalid > int(end_str):
                 break
@@ -45,15 +45,15 @@ def part_2(raw_input: TextIOWrapper) -> int:
         if len(start_str) == len(end_str) == 1:
             continue
 
-        for id in range(int(start_str), int(end_str) + 1):
-            id_str = str(id)
+        for id_ in range(int(start_str), int(end_str) + 1):
+            id_str = str(id_)
             for p in prime_factors(len(id_str)):
                 group_len = len(id_str) // p
                 groups = [
                     id_str[i * group_len : i * group_len + group_len] for i in range(p)
                 ]
                 if all(g == groups[0] for g in groups):
-                    invalid_ids += id
+                    invalid_ids += id_
                     break
 
     return invalid_ids
