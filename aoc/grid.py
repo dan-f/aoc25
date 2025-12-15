@@ -9,6 +9,10 @@ class Grid(Generic[T]):
     def from_raw(raw_input: TextIOWrapper) -> "Grid[str]":
         return Grid([[c for c in line.strip()] for line in raw_input])
 
+    @staticmethod
+    def of_size[T](rows: int, cols: int, init: T) -> "Grid[T]":
+        return Grid([[init for _ in range(cols)] for _ in range(rows)])
+
     def __init__(self, data: list[list[T]]):
         self.data = data
 
