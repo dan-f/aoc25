@@ -1,9 +1,7 @@
 import re
-from dataclasses import dataclass
 from enum import Enum
 from io import TextIOWrapper
 from math import prod
-from typing import Iterator
 
 
 def part_1(raw_input: TextIOWrapper) -> int:

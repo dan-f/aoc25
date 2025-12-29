@@ -1,13 +1,11 @@
 aoc *ARGS:
   uv run main.py {{ARGS}}
 
-check: types lint format
+check: types ruff
 
 types:
   uv run mypy .
 
-lint:
-  uv run ruff check
-
-format:
+ruff:
+  uv run ruff check --fix
   uv run ruff format

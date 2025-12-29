@@ -42,7 +42,7 @@ class Grid(Generic[T]):
     def __repr__(self) -> str:
         items = []
         for (r, c), item in self:
-            items.append(repr(item) if type(item) != str else item)
+            items.append(repr(item) if type(item) is not str else item)
             if r < self.rows - 1 and c == self.cols - 1:
                 items.append("\n")
         return "".join(items)

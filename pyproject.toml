@@ -16,4 +16,4 @@ dev = [
 strict = true
 
 [tool.ruff.lint]
-select = ["I"]
+extend-select = ["I"]
