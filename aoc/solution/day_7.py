@@ -6,7 +6,7 @@ from aoc.grid import Grid
 
 
 def part_1(raw_input: TextIOWrapper) -> int:
-    grid = Grid.from_raw(raw_input)
+    grid = Grid.from_lines(raw_input)
     start_row, start_col = -1, -1
     for (row, col), item in grid:
         if item == "S":
@@ -39,7 +39,7 @@ def part_1(raw_input: TextIOWrapper) -> int:
 
 
 def part_2(raw_input: TextIOWrapper) -> int:
-    grid = Grid.from_raw(raw_input)
+    grid = Grid.from_lines(raw_input)
     start_row, start_col = -1, -1
     for (row, col), item in grid:
         if item == "S":

@@ -1,16 +1,15 @@
-from io import TextIOWrapper
 from typing import Generic, Iterator, TypeVar
 
 T = TypeVar("T")
 
 
 class Grid(Generic[T]):
-    @staticmethod
-    def from_raw(raw_input: TextIOWrapper) -> "Grid[str]":
-        return Grid([[c for c in line.strip()] for line in raw_input])
+    @classmethod
+    def from_lines(cls, lines: Iterator[str]) -> "Grid[str]":
+        return Grid([[c for c in line.strip()] for line in lines])
 
-    @staticmethod
-    def of_size[T](rows: int, cols: int, init: T) -> "Grid[T]":
+    @classmethod
+    def of_size(cls, rows: int, cols: int, init: T) -> "Grid[T]":
         return Grid([[init for _ in range(cols)] for _ in range(rows)])
 
     def __init__(self, data: list[list[T]]):

@@ -116,12 +116,6 @@ class NormalizedGrid:
 
         return True
 
-        # return all(
-        #     self.grid[(row, col)] == "#" or self.grid[(row, col)] == "X"
-        #     for row in range(start_row, stop_row)
-        #     for col in range(start_col, stop_col)
-        # )
-
     @staticmethod
     def compress(nums: list[int]) -> tuple[list[int], int]:
         """

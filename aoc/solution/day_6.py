@@ -51,8 +51,8 @@ class Operation(Enum):
     ADD = "+"
     MUL = "*"
 
-    @staticmethod
-    def from_str(s: str) -> "Operation":
+    @classmethod
+    def from_str(cls, s: str) -> "Operation":
         match s:
             case "+":
                 return Operation.ADD

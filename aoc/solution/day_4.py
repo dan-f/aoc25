@@ -5,11 +5,11 @@ from aoc.grid import Grid
 
 
 def part_1(raw_input: TextIOWrapper) -> int:
-    return sum(1 for _ in accessible_rolls(Grid.from_raw(raw_input)))
+    return sum(1 for _ in accessible_rolls(Grid.from_lines(raw_input)))
 
 
 def part_2(raw_input: TextIOWrapper) -> int:
-    grid = Grid.from_raw(raw_input)
+    grid = Grid.from_lines(raw_input)
     removed = 0
     coords = [coord for coord in accessible_rolls(grid)]
     while coords:
