@@ -33,7 +33,7 @@ def part_2(raw_input: TextIOWrapper) -> int:
 
 
 def tile_area(t1: tuple[int, int], t2: tuple[int, int]) -> int:
-    return abs(t1[0] - t2[0] + 1) * abs(t1[1] - t2[1] + 1)
+    return (abs(t1[0] - t2[0]) + 1) * (abs(t1[1] - t2[1]) + 1)
 
 
 def parse_tiles(raw_input: TextIOWrapper) -> Iterator[tuple[int, int]]:
@@ -81,6 +81,7 @@ class NormalizedGrid:
                     transitions += 1
                 elif (prv_tile == "#" or prv_tile == "X") and cur_tile == ".":
                     transitions += 1
+                prv_tile = cur_tile
 
                 if cur_tile == "." and transitions % 2 == 1:
                     return ray_row, ray_col
@@ -104,15 +105,17 @@ class NormalizedGrid:
 
     def valid_rect(self, i: int, j: int) -> bool:
         p1, p2 = self.compressed[i], self.compressed[j]
-        start_row, stop_row = min(p1[1], p2[1]), max(p1[1], p2[1]) + 1
-        start_col, stop_col = min(p1[0], p2[0]), max(p1[0], p2[0]) + 1
+        first_row, last_row = min(p1[1], p2[1]), max(p1[1], p2[1])
+        first_col, last_col = min(p1[0], p2[0]), max(p1[0], p2[0])
 
-        for col in range(start_col, stop_col):
-            if self.grid[start_row, col] == "." or self.grid[stop_row - 1, col] == ".":
-                return False
-        for row in range(start_row, stop_row):
-            if self.grid[row, start_col] == "." or self.grid[row, start_col - 1] == ".":
-                return False
+        if any(
+            self.grid[first_row, col] == "." or self.grid[last_row, col] == "."
+            for col in range(first_col, last_col + 1)
+        ) or any(
+            self.grid[row, first_col] == "." or self.grid[row, first_col] == "."
+            for row in range(first_row, last_row + 1)
+        ):
+            return False
 
         return True
 
