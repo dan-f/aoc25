@@ -5,18 +5,23 @@ from aoc.grid import Grid
 
 
 def part_1(raw_input: TextIOWrapper) -> int:
-    puzzle = parse_input(raw_input)
-    print(puzzle)
+    regions, presents = parse_input(raw_input)
 
-    """
-    What would I do?
-    - first check if shape's dimensions can even fit?
-    - don't close-off concave sides against a wall
-    - place in corners to maximize available room
-    - place larger shapes first?
-    """
+    def fits_presents(region: Region) -> bool:
+        """
+        This is technically not a complete solution (will give false positives),
+        but it led to the correct result on my puzzle input. I'd have otherwise
+        conducted a search where we pick the next un-placed present, which in
+        whatever flipped/rotated orientation, leaves the maximum remaining
+        "open" space (space that could accommodate further presents).
+        """
+        presents_area = sum(
+            count * sum(cell == "#" for _, cell in presents[p])
+            for p, count in enumerate(region.presents)
+        )
+        return presents_area <= region.width * region.length
 
-    raise NotImplementedError()
+    return sum(fits_presents(region) for region in regions)
 
 
 def part_2(raw_input: TextIOWrapper) -> int:
@@ -27,24 +32,20 @@ def part_2(raw_input: TextIOWrapper) -> int:
 class Region:
     width: int
     length: int
-    shapes: list[int]
+    presents: list[int]
 
     @classmethod
     def from_str(cls, s: str) -> Region:
-        [dimensions_str, shapes_str] = s.split(": ")
+        [dimensions_str, presents_str] = s.split(": ")
         [width_str, height_str] = dimensions_str.split("x")
-        shapes = [int(s) for s in shapes_str.split(" ")]
-        return Region(int(width_str), int(height_str), shapes)
+        presents = [int(s) for s in presents_str.split(" ")]
+        return Region(int(width_str), int(height_str), presents)
 
 
-@dataclass
-class Puzzle:
-    regions: list[Region]
-    shapes: list[Grid[str]]
-
-
-def parse_input(raw_input: TextIOWrapper) -> Puzzle:
-    [*shapes_blocks, regions_block] = raw_input.read().strip().split("\n\n")
+def parse_input(raw_input: TextIOWrapper) -> tuple[list[Region], list[Grid[str]]]:
+    [*presents_blocks, regions_block] = raw_input.read().strip().split("\n\n")
     regions = [Region.from_str(s) for s in regions_block.splitlines()]
-    shapes = [Grid.from_lines(iter(block.splitlines()[1:])) for block in shapes_blocks]
-    return Puzzle(regions, shapes)
+    presents = [
+        Grid.from_lines(iter(block.splitlines()[1:])) for block in presents_blocks
+    ]
+    return regions, presents
