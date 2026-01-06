@@ -2,10 +2,39 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 
+[manifest]
+members = [
+    "aoc25",
+    "aocli",
+]
+
 [[package]]
 name = "aoc25"
 version = "0.1.0"
 source = { virtual = "." }
+dependencies = [
+    { name = "aocli" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "mypy" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "aocli", editable = "packages/aocli" }]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.19.0" },
+    { name = "ruff", specifier = ">=0.14.9" },
+]
+
+[[package]]
+name = "aocli"
+version = "0.1.0"
+source = { editable = "packages/aocli" }
 
 [package.dev-dependencies]
 dev = [

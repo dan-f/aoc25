@@ -1,10 +1,10 @@
 [project]
 name = "aoc25"
 version = "0.1.0"
-description = "Advent of code 2025 solutions"
+description = "Advent of Code 2025"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = ["aocli"]
 
 [dependency-groups]
 dev = [
@@ -12,8 +12,19 @@ dev = [
     "ruff>=0.14.9",
 ]
 
+[tool.aocli]
+solutions-pkg = "aoc.solution"
+
 [tool.mypy]
 strict = true
 
 [tool.ruff.lint]
 extend-select = ["I"]
+
+[tool.uv.sources]
+aocli = { workspace = true }
+
+[tool.uv.workspace]
+members = [
+    "packages/aocli",
+]

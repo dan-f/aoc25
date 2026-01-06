@@ -1,7 +1,10 @@
-from io import TextIOWrapper
+from typing import TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=3, part=1)
+def part_1(raw_input: TextIO) -> int:
     joltage = 0
     for line in raw_input:
         line = line.strip()
@@ -11,7 +14,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return joltage
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=3, part=2)
+def part_2(raw_input: TextIO) -> int:
     joltage = 0
     for line in raw_input:
         line = line.strip()

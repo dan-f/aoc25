@@ -1,7 +1,10 @@
-from io import TextIOWrapper
+from typing import TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=5, part=1)
+def part_1(raw_input: TextIO) -> int:
     ranges, ids = parse_input(raw_input)
     merged = merge_ranges(ranges)
 
@@ -22,7 +25,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return fresh_ids
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=5, part=2)
+def part_2(raw_input: TextIO) -> int:
     ranges, _ = parse_input(raw_input)
     return sum(r[1] - r[0] + 1 for r in merge_ranges(ranges))
 
@@ -38,7 +42,7 @@ def merge_ranges(ranges: list[tuple[int, int]]) -> list[tuple[int, int]]:
     return [(r[0], r[1]) for r in merged]
 
 
-def parse_input(raw_input: TextIOWrapper) -> tuple[list[tuple[int, int]], list[int]]:
+def parse_input(raw_input: TextIO) -> tuple[list[tuple[int, int]], list[int]]:
     def parse_range(r: str) -> tuple[int, int]:
         [start, stop] = r.split("-")
         return int(start), int(stop)

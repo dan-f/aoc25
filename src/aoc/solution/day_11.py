@@ -1,9 +1,12 @@
 from collections import defaultdict
 from functools import cache
-from io import TextIOWrapper
+from typing import TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=11, part=1)
+def part_1(raw_input: TextIO) -> int:
     devices = parse_devices(raw_input)
 
     def paths(cur: str, target: str) -> int:
@@ -18,7 +21,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return paths("you", "out")
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=11, part=2)
+def part_2(raw_input: TextIO) -> int:
     devices = parse_devices(raw_input)
 
     @cache
@@ -37,7 +41,7 @@ def part_2(raw_input: TextIOWrapper) -> int:
     return paths("svr", "out")
 
 
-def parse_devices(raw_input: TextIOWrapper) -> defaultdict[str, list[str]]:
+def parse_devices(raw_input: TextIO) -> defaultdict[str, list[str]]:
     result = defaultdict[str, list[str]](list)
 
     for line in raw_input:

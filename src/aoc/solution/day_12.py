@@ -1,10 +1,13 @@
 from dataclasses import dataclass
-from io import TextIOWrapper
+from typing import TextIO
+
+from aocli import solution
 
 from aoc.grid import Grid
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=12, part=1)
+def part_1(raw_input: TextIO) -> int:
     regions, presents = parse_input(raw_input)
 
     def fits_presents(region: Region) -> bool:
@@ -24,10 +27,6 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return sum(fits_presents(region) for region in regions)
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
-    raise NotImplementedError()
-
-
 @dataclass
 class Region:
     width: int
@@ -42,7 +41,7 @@ class Region:
         return Region(int(width_str), int(height_str), presents)
 
 
-def parse_input(raw_input: TextIOWrapper) -> tuple[list[Region], list[Grid[str]]]:
+def parse_input(raw_input: TextIO) -> tuple[list[Region], list[Grid[str]]]:
     [*presents_blocks, regions_block] = raw_input.read().strip().split("\n\n")
     regions = [Region.from_str(s) for s in regions_block.splitlines()]
     presents = [

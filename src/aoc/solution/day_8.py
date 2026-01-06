@@ -1,9 +1,11 @@
 import math
-from io import TextIOWrapper
-from typing import Generic, Hashable, Iterator, TypeVar
+from typing import Generic, Hashable, Iterator, TextIO, TypeVar
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=8, part=1)
+def part_1(raw_input: TextIO) -> int:
     pairs = closest_pairs([*parse_boxes(raw_input)])
     dj_set = DisjointSet[Coord]()
     i = 0
@@ -21,7 +23,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     )
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=8, part=2)
+def part_2(raw_input: TextIO) -> int:
     boxes = [*parse_boxes(raw_input)]
     pairs = closest_pairs(boxes)
     dj_set = DisjointSet[Coord]()
@@ -37,7 +40,7 @@ def part_2(raw_input: TextIOWrapper) -> int:
 Coord = tuple[int, int, int]
 
 
-def parse_boxes(raw_input: TextIOWrapper) -> Iterator[Coord]:
+def parse_boxes(raw_input: TextIO) -> Iterator[Coord]:
     for line in raw_input:
         nums = line.strip().split(",")
         yield int(nums[0]), int(nums[1]), int(nums[2])

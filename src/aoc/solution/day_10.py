@@ -3,12 +3,14 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass
 from functools import cache
-from io import TextIOWrapper
 from itertools import chain, combinations, repeat
-from typing import Iterator, Optional
+from typing import Iterator, Optional, TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=10, part=1)
+def part_1(raw_input: TextIO) -> int:
     def fewest_presses(
         machine: Machine,
         lights: Optional[tuple[bool, ...]] = None,
@@ -32,7 +34,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return sum(fewest_presses(machine) for machine in parse_machines(raw_input))
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=10, part=2)
+def part_2(raw_input: TextIO) -> int:
     """
     Solution adapted from
     https://www.reddit.com/r/adventofcode/comments/1pk87hl/2025_day_10_part_2_bifurcate_your_way_to_victory/
@@ -111,7 +114,7 @@ class Machine:
     joltages: tuple[int, ...]
 
 
-def parse_machines(raw_input: TextIOWrapper) -> Iterator[Machine]:
+def parse_machines(raw_input: TextIO) -> Iterator[Machine]:
     lights_re = r"\[(.+)\]"
     buttons_re = r"\(([\d|\,]+)\)"
     joltages_re = r"{(.+)}"

@@ -1,11 +1,14 @@
 from collections import deque
 from functools import cache
-from io import TextIOWrapper
+from typing import TextIO
+
+from aocli import solution
 
 from aoc.grid import Grid
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=7, part=1)
+def part_1(raw_input: TextIO) -> int:
     grid = Grid.from_lines(raw_input)
     start_row, start_col = -1, -1
     for (row, col), item in grid:
@@ -38,7 +41,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return splits
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=7, part=2)
+def part_2(raw_input: TextIO) -> int:
     grid = Grid.from_lines(raw_input)
     start_row, start_col = -1, -1
     for (row, col), item in grid:

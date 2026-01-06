@@ -1,10 +1,13 @@
 import re
 from enum import Enum
-from io import TextIOWrapper
 from math import prod
+from typing import TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=6, part=1)
+def part_1(raw_input: TextIO) -> int:
     lines = [line.strip() for line in raw_input]
     num_data = lines[:-1]
     op_data = lines[-1]
@@ -24,7 +27,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return sum(eval(op, nums) for op, nums in zip(operations, nums_flipped))
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=6, part=2)
+def part_2(raw_input: TextIO) -> int:
     lines = [line.strip("\n") for line in raw_input]
     problem_columns = [
         (Operation.from_str(match.group()[0]), range(*match.span()))

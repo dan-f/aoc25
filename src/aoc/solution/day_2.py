@@ -1,10 +1,12 @@
 import math
 from functools import cache
-from io import TextIOWrapper
-from typing import Iterator
+from typing import Iterator, TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=2, part=1)
+def part_1(raw_input: TextIO) -> int:
     invalid_ids = 0
 
     for start_str, end_str in parse_ranges(raw_input):
@@ -38,7 +40,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return invalid_ids
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=2, part=2)
+def part_2(raw_input: TextIO) -> int:
     invalid_ids = 0
 
     for start_str, end_str in parse_ranges(raw_input):
@@ -85,7 +88,7 @@ def primes(limit: int) -> Iterator[int]:
     yield from (i + 2 for i, is_prime in enumerate(PRIMES) if is_prime)
 
 
-def parse_ranges(raw_input: TextIOWrapper) -> Iterator[tuple[str, str]]:
+def parse_ranges(raw_input: TextIO) -> Iterator[tuple[str, str]]:
     for range_str in raw_input.read().strip().split(","):
         [start_str, end_str] = range_str.split("-")
         yield start_str, end_str

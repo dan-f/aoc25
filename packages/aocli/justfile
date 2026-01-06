@@ -1,8 +1,5 @@
 [default]
-check: aocli types ruff
-
-aocli:
-  just packages/aocli/
+check: types ruff
 
 types:
   uv run mypy .

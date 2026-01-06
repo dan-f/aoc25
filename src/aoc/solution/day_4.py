@@ -1,14 +1,17 @@
-from io import TextIOWrapper
-from typing import Iterator
+from typing import Iterator, TextIO
+
+from aocli import solution
 
 from aoc.grid import Grid
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=4, part=1)
+def part_1(raw_input: TextIO) -> int:
     return sum(1 for _ in accessible_rolls(Grid.from_lines(raw_input)))
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=4, part=2)
+def part_2(raw_input: TextIO) -> int:
     grid = Grid.from_lines(raw_input)
     removed = 0
     coords = [coord for coord in accessible_rolls(grid)]

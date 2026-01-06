@@ -1,10 +1,12 @@
-from io import TextIOWrapper
-from typing import Iterator
+from typing import Iterator, TextIO
+
+from aocli import solution
 
 from aoc.grid import Grid
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=9, part=1)
+def part_1(raw_input: TextIO) -> int:
     tiles = [*parse_tiles(raw_input)]
 
     return max(
@@ -14,7 +16,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     )
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=9, part=2)
+def part_2(raw_input: TextIO) -> int:
     tiles = [*parse_tiles(raw_input)]
     grid = NormalizedGrid(tiles)
 
@@ -36,7 +39,7 @@ def tile_area(t1: tuple[int, int], t2: tuple[int, int]) -> int:
     return (abs(t1[0] - t2[0]) + 1) * (abs(t1[1] - t2[1]) + 1)
 
 
-def parse_tiles(raw_input: TextIOWrapper) -> Iterator[tuple[int, int]]:
+def parse_tiles(raw_input: TextIO) -> Iterator[tuple[int, int]]:
     for line in raw_input:
         [x, y] = line.strip().split(",")
         yield int(x), int(y)

@@ -1,8 +1,10 @@
-from io import TextIOWrapper
-from typing import Iterator
+from typing import Iterator, TextIO
+
+from aocli import solution
 
 
-def part_1(raw_input: TextIOWrapper) -> int:
+@solution(day=1, part=1)
+def part_1(raw_input: TextIO) -> int:
     result = 0
     dial = 50
     for turn in rotations(raw_input):
@@ -12,7 +14,8 @@ def part_1(raw_input: TextIOWrapper) -> int:
     return result
 
 
-def part_2(raw_input: TextIOWrapper) -> int:
+@solution(day=1, part=2)
+def part_2(raw_input: TextIO) -> int:
     result = 0
     dial = 50
     for turn in rotations(raw_input):
@@ -27,7 +30,7 @@ def part_2(raw_input: TextIOWrapper) -> int:
     return result
 
 
-def rotations(raw_input: TextIOWrapper) -> Iterator[int]:
+def rotations(raw_input: TextIO) -> Iterator[int]:
     for line in raw_input:
         line = line.strip()
         num = int(line[1:])
