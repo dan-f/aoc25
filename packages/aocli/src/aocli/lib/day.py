@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Callable, TextIO
 
 from aocli.lib.config import Config
+from aocli.lib.input import write_input_file
 
 __all__ = ["solution", "get_solution", "generate_solution"]
 
@@ -48,16 +49,15 @@ def generate_solution(day: int, config: Config) -> None:
     if solution_path.exists():
         raise FileExistsError(f"solution file for day {day} already exists")
 
-    if not config.input_dir.exists():
-        config.input_dir.mkdir()
-    input_path = config.input_dir.joinpath(f"{day}.txt")
-    if not input_path.exists():
-        input_path.touch()
+    wrote_input, input_path = write_input_file(day, config)
+    if wrote_input:
+        print(f"Created day {day} input file: {input_path}")
+    else:
+        print(f"Day {day} input file already exists: {input_path}")
 
     with solution_path.open("w", encoding="utf-8") as f:
         f.write(solution_template(day))
     print(f"Created day {day} solution file: {solution_path}")
-    print(f"Created day {day} input file: {input_path}")
 
 
 def solution_template(day: int) -> str:
